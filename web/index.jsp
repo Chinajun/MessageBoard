@@ -8,9 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>主界面</title>
   </head>
   <body>
-  hello,world
+  <%
+    String username = (String) request.getSession().getAttribute("username");
+  %>
+  <h3>欢迎用户<%=username%></h3>
   </body>
 </html>
