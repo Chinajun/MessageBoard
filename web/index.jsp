@@ -7,13 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>主界面</title>
-  </head>
-  <body>
-  <%
-    String username = (String) request.getSession().getAttribute("username");
-  %>
-  <h3>欢迎用户<%=username%></h3>
-  </body>
+<head>
+  <title></title>
+  <meta http-equiv="refresh" content="0;url=<%=request.getContextPath()%>/message/list.do">
+</head>
 </html>
