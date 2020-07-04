@@ -9,6 +9,6 @@
 <html>
 <head>
   <title></title>
-  <meta http-equiv="refresh" content="0;url=<%=request.getContextPath()%>/message/list.do">
+  <meta http-equiv="refresh" content="0;url=<%=request.getContextPath()%>/msgListServlet">
 </head>
 </html>

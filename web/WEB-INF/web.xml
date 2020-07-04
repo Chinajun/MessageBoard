@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
+        <welcome-file>/login.jsp</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>MsgListServlet</servlet-name>
+        <servlet-class>servlet.MsgListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MsgListServlet</servlet-name>
+        <url-pattern>/msgListServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

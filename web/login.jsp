@@ -9,34 +9,30 @@
 <html>
 <head>
     <title>登陆界面</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
 <div class="login">
-    <form action="/hello/login" method="post">
-        <table>
-            <tr>
-                <td class="td1">用户名</td>
-                <td><input type="text" class="input1" name="username"></td>
-            </tr>
-            <tr>
-                <td class="td1">密码</td>
-                <td><input type="password" class="input1" name="password"></td>
-            </tr>
-            <%
-                String msg = "";
-                if(request.getAttribute("msg")!=null){
-                    msg = (String)request.getAttribute("msg");
-                }
-            %>
-            <h3 style="color: red"><%=msg %></h3>
-            <tr>
-                <td colspan="2">
-                    <div class="btn-red">
-                        <input type="submit" value="登录" id="login-btn">
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <div class="header">
+        <h1>
+            <a href="">登录</a>
+            <a href="">注册</a>
+        </h1>
+    </div>
+    <form action="" method="post">
+        <div class="name">
+            <p>用户名</p>
+            <input type="text" id="name" name="username" placeholder="请输入用户名">
+            <p></p>
+        </div>
+        <div class="pwd">
+            <p>密码</p>
+            <input type="password" id="pwd" name="password" placeholder="请输入密码">
+            <p></p>
+        </div>
+        <div class="btn">
+            <input type="submit" value="登录" id="login-btn">
+        </div>
     </form>
 </div>
 </body>
