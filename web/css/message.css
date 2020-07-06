@@ -1,0 +1,22 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+a{
+    text-decoration: none;
+}
+.title{
+    margin-bottom: 10px;
+}
+.content{
+    margin-bottom: 10px;
+}
+.author{
+    float: left;
+}
+.date{
+    float: right;
+}
+.clear{
+    clear: both;
+}
