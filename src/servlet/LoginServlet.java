@@ -14,19 +14,19 @@ import java.sql.ResultSet;
 
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Connection connection = ConnectionUtil.getConnection();
-        String sql = "select * from user where username = ? and password = ?";
+        Connection connection = null;
+        String sql = "select * from user where username = '"+username+"' and password = '"+password+"'";
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         User user = null;
         try{
+            connection = ConnectionUtil.getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            if (resultSet.next()){
                 user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setUsername(username);
@@ -35,11 +35,12 @@ public class LoginServlet extends HttpServlet {
                 user.setPhone(resultSet.getString("phone"));
                 request.getSession().setAttribute("user",user);
                 request.getRequestDispatcher("/message.jsp").forward(request,response);
+            }else{
+                System.out.println("登陆失败");
+                request.setAttribute("msg","登陆失败，用户名或密码错误");
+                request.getRequestDispatcher("/login.jsp").forward(request,response);
             }
         }catch (Exception e){
-            System.out.println("登陆失败");
-            request.setAttribute("msg","登陆失败，用户名或密码错误");
-            request.getRequestDispatcher("/login.jsp").forward(request,response);
             e.printStackTrace();
         }finally {
             ConnectionUtil.release(resultSet,preparedStatement,connection);

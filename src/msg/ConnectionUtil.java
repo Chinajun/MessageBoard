@@ -5,7 +5,7 @@ import java.sql.*;
  * 数据库连接
  */
 public final class ConnectionUtil {
-    private static String url = "jdbc:mysql:///cyj_message_board";
+    private static String url = "jdbc:mysql:///cyj_message_board?characterEncoding=utf-8";
     private static String username = "root";
     private static String password = "root";
     private ConnectionUtil() {}
@@ -22,14 +22,9 @@ public final class ConnectionUtil {
      * 获得数据库连接
      * @return
      */
-    public static Connection getConnection(){
-        try {
-            DriverManager.getConnection(url,username,password);
-        }catch (Exception e){
-            System.out.println("创建数据库连接失败");
-            e.printStackTrace();
-        }
-        return null;
+    public static Connection getConnection() throws Exception{
+        Connection conn = DriverManager.getConnection(url, username, password);
+        return conn;
     }
 
     /**
@@ -60,6 +55,23 @@ public final class ConnectionUtil {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+    public static void release(Statement stmt, Connection conn) {
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }

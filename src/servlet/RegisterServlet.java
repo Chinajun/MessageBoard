@@ -1,45 +1,47 @@
 package servlet;
 
 import msg.ConnectionUtil;
-import msg.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String realName = request.getParameter("realName");
         String phone = request.getParameter("phone");
-        Connection connection = ConnectionUtil.getConnection();
-        String sql = "insert user set username = ? , password = ? , real_name = ? , phone = ?";
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        User user = null;
-        try{
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
-            preparedStatement.setString(3,realName);
-            preparedStatement.setString(4,phone);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                user = new User();
-                //TODO
+        if(username.equals("")||password.equals("")||realName.equals("")||phone.equals("")){
+            System.out.println("请完善个人信息");
+        }else{
+            Connection connection = null;
+            String sql = "insert user (username,password,real_name,phone) values ('"+username+"','"+password+"','"+realName+"','"+phone+"')";
+            PreparedStatement preparedStatement = null;
+            try{
+                connection = ConnectionUtil.getConnection();
+                preparedStatement = connection.prepareStatement(sql);
+                int n = preparedStatement.executeUpdate(sql);
+                if(n>0){
+                    request.getRequestDispatcher("/registerSuccess.jsp").forward(request,response);
+                }else{
+                    System.out.println("注册失败，用户名已被注册");
+                    request.setAttribute("msg","注册失败，用户名已被注册");
+                    request.getRequestDispatcher("/register.jsp").forward(request,response);
+                }
+            }catch (Exception e){
+                System.out.println("注册失败");
+                request.setAttribute("msg","注册失败，用户名已被注册");
+                request.getRequestDispatcher("/register.jsp").forward(request,response);
+                e.printStackTrace();
+            }finally {
+                ConnectionUtil.release(preparedStatement,connection);
             }
-        }catch (Exception e){
-
-            e.printStackTrace();
-        }finally {
-            ConnectionUtil.release(resultSet,preparedStatement,connection);
         }
     }
 

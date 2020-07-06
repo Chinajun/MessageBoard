@@ -42,6 +42,13 @@
         </div>
         <div class="btn">
             <input type="submit" value="注册" id="register-btn">
+            <%
+                String msg = "";
+                if(request.getAttribute("msg")!=null){
+                    msg = (String)request.getAttribute("msg");
+                }
+            %>
+            <p style="color: red"><%=msg %></p>
         </div>
     </form>
 </div>
