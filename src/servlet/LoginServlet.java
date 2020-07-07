@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
                 user.setRealName(resultSet.getString("real_name"));
                 user.setPhone(resultSet.getString("phone"));
                 request.getSession().setAttribute("user",user);
-                request.getRequestDispatcher("/message.jsp").forward(request,response);
+                request.getRequestDispatcher("/index.jsp").forward(request,response);
             }else{
                 System.out.println("登陆失败");
                 request.setAttribute("msg","登陆失败，用户名或密码错误");

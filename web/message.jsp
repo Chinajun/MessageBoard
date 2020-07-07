@@ -1,3 +1,5 @@
+<%@ page import="msg.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 39826
@@ -18,9 +20,9 @@
         <div class="header">
             <%
                 String username = "";
-                //TODO 传参
                 if(request.getSession().getAttribute("user")!=null){
-                    username = (String)request.getSession().getAttribute("user");
+                    User user = (User) request.getSession().getAttribute("user");
+                    username = user.getUsername();
             %>
             <h1>欢迎<%=username%></h1>
             <h5><br>—— 留下你想说的话吧</h5>
@@ -36,28 +38,18 @@
                 }
             %>
         </div>
-
-        <div class="message">
-            <div class="title"><b>测试</b></div>
-            <div class="content">这里我们遇到了一点新东西。你看到的 v-bind attribute 被称为指令。指令带有前缀 v-，以表示它们是 Vue 提供的特殊 attribute。可能你已经猜到了，它们会在渲染的 DOM 上应用特殊的响应式行为。在这里，该指令的意思是：“将这个元素节点的 title attribute 和 Vue 实例的 message property 保持一致”。</div>
-            <div class="msg">
-                <div class="author"><b>admin</b></div>
-                <div class="date"><b>2020-7-6 16:07:00</b></div>
+        <c:forEach items="${list}" var="msg">
+            <div class="message">
+                <div class="title"><b>${msg.title}</b></div>
+                <div class="content">${msg.content}</div>
+                <div class="msg">
+                    <div class="author"><b>${msg.username}</b></div>
+                    <div class="date"><b>${msg.createTime}</b></div>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <hr>
-        <div class="message">
-            <div class="title"><b>测试</b></div>
-            <div class="content">这里我们遇到了一点新东西。你看到的 v-bind attribute 被称为指令。指令带有前缀 v-，以表示它们是 Vue 提供的特殊 attribute。可能你已经猜到了，它们会在渲染的 DOM 上应用特殊的响应式行为。在这里，该指令的意思是：“将这个元素节点的 title attribute 和 Vue 实例的 message property 保持一致”。</div>
-            <div class="msg">
-                <div class="author"><b>admin</b></div>
-                <div class="date"><b>2020-7-6 16:07:00</b></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-
-        <hr>
+            <hr>
+        </c:forEach>
         <p class="text-center text-muted">by <a href="https://github.com/Chinajun" target="_blank"><b>cyj</b></a></p>
     </div>
 </div>

@@ -4,15 +4,13 @@ import java.util.Date;
 
 public class Msg {
     private long id;
-    private long userId;
     private String username;
     private String title;
     private String content;
     private Date createTime;
 
-    public Msg(long id, long userId, String username, String title, String content, Date createTime) {
+    public Msg(long id, String username, String title, String content, Date createTime) {
         this.id = id;
-        this.userId = userId;
         this.username = username;
         this.title = title;
         this.content = content;
@@ -25,14 +23,6 @@ public class Msg {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {
