@@ -25,12 +25,12 @@
                     username = user.getUsername();
             %>
             <h1>欢迎<%=username%></h1>
-            <h5><br>—— 留下你想说的话吧</h5>
+            <h5><br>—— <a href="addMsg.jsp">留下你想说的话吧</a></h5>
             <br><hr>
             <%
                 }else{
             %>
-            <h1>欢迎来到我的论坛</h1>
+            <h1>欢迎来到我的留言板</h1>
             <p></p>
             <h5><a href="login.jsp">登录</a>后发表留言</h5>
             <br><hr>

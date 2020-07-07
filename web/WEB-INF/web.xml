@@ -30,4 +30,12 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/registerServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddMsgServlet</servlet-name>
+        <servlet-class>servlet.AddMsgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddMsgServlet</servlet-name>
+        <url-pattern>/addMsgServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -19,6 +19,8 @@ public class RegisterServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         if(username.equals("")||password.equals("")||realName.equals("")||phone.equals("")){
             System.out.println("请完善个人信息");
+            request.setAttribute("msg","注册失败，请完善个人信息");
+            request.getRequestDispatcher("/register.jsp").forward(request,response);
         }else{
             Connection connection = null;
             String sql = "insert user (username,password,real_name,phone) values ('"+username+"','"+password+"','"+realName+"','"+phone+"')";
